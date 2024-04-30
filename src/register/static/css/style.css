@@ -1,0 +1,15 @@
+.form-layout {
+    border-radius: 15px;
+    width: 500px;
+  }
+  
+  .message-text{
+    color:white
+  }
+
+
+  .avatar {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+  }

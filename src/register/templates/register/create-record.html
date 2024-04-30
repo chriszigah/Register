@@ -1,0 +1,43 @@
+{% extends 'register/base.html' %}
+ {% load crispy_forms_tags%}
+ 
+ {% block content %} 
+
+ <body> 
+    <div class="container bg-light shadow-md p-5 w-400 form-layout">
+      <div class="text-center">
+      <h3>Create a New Record</h3>
+        <h6>Start adding in the required details for your record.</h6>
+      <hr />
+    </div>
+      <br />
+      <form method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token%} {{form|crispy}}
+        <br />
+        <button type="submit" class="btn btn-primary btn-block p-2">
+          
+          Create Record
+          <i class="fa fa-check"></i> &nbsp;
+        </button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-block p-2">
+          Return
+          <i class="fa fa-arrow-left"></i> &nbsp;
+        </a>
+        <br />
+      </form>
+    </div>
+  </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'register/base.html' %}
+ {% load crispy_forms_tags%}
+ 
+ {% block content %} 
+
+ <body> 
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-primary my-3 mx-4">Go Back</a>
+    <div class="row">
+        <form method="POST">
+            {% csrf_token %}
+            <h1 class="fw-light">Are you sure you want to delete {{ my_record.first_name }}?</h1>
+            <p class="fw-ligh">This cannot be undone</p>
+            <div>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </form>
+    </div>
+  </body>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'register/base.html' %}
+ {% load crispy_forms_tags%}
+ 
+ {% block content %} 
+
+ <body> 
+    <div class="container bg-light shadow-md p-5 w-400 form-layout">
+      <div class="text-center">
+      <h3>Update Record</h3>
+        <h6>Update your record down below.</h6>
+      <hr />
+    </div>
+      <br />
+      <form method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token%} {{form|crispy}}
+        <br />
+        <button type="submit" class="btn btn-primary w-100 btn-block p-2">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
+            Update Record
+        </button>
+        <br />
+      </form>
+    </div>
+  </body>
+{% endblock %}
