@@ -13,19 +13,17 @@ from . models import Record, Department
 from django.contrib import messages
 
    
-class home(TemplateView):
+class Home(TemplateView):
     template_name = 'register/index.html'
 
-
 # - Register
-class register(View):
+class Register(View):
 
     def get(self, request):
         form = SignUpForm()
         context = {'form':form}
         return render(request, 'register/register.html', context=context)
        
-
     def post(self, request):
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -38,15 +36,13 @@ class register(View):
         context = {'form':form}
         return render(request, 'register/register.html', context=context)
   
-
 # Login a user
-class login(View):
+class Login(View):
 
     def get(self, request):
         form = LoginForm()
         context = {'form':form}
         return render(request, 'register/login.html', context=context)
-
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -61,21 +57,18 @@ class login(View):
         
         return redirect('dashboard')
             
-
 # Users DashBoard
-class dashboard(LoginRequiredMixin, View):
+class Dashboard(LoginRequiredMixin, View):
     def get(self, request):
         my_records = Record.objects.filter(user=self.request.user.id).order_by('id')
         context = {'records': my_records}
   
         return render(request, 'register/dashboard.html', context=context)
   
-
 # Create Record
-class create_record(LoginRequiredMixin, CreateView):
+class CreateRrecord(LoginRequiredMixin, CreateView):
     model = Record
     form_class = CreateRecordForm
-    
     template_name = 'register/create-record.html'
     success_url = reverse_lazy('dashboard')
 
@@ -90,25 +83,21 @@ class create_record(LoginRequiredMixin, CreateView):
         
  
 # Update Record
-
-class update_record(LoginRequiredMixin, UpdateView):
+class UpdateRecord(LoginRequiredMixin, UpdateView):
     model = Record
     form_class = CreateRecordForm
     template_name = 'register/update-record.html'
     success_url = reverse_lazy('dashboard')
     
-  
-
 # Read / View a singular record
-class view_record(LoginRequiredMixin, View):
+class ViewRecord(LoginRequiredMixin, View):
     def get(self, request, pk):
         all_records = Record.objects.get(id=pk)
         context = {'record': all_records}
         return render(request, 'register/view-record.html', context=context)
 
-
 # Delete a record
-class delete_record(LoginRequiredMixin, DeleteView):
+class DeleteRecord(LoginRequiredMixin, DeleteView):
     model = Record
     template_name = 'register/delete-record.html'
     success_url = reverse_lazy('dashboard')
