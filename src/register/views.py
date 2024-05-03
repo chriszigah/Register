@@ -12,7 +12,9 @@ from . models import Record, Department
 
 from django.contrib import messages
 
-   
+from . helpers import unique_id_generator
+
+     
 class Home(TemplateView):
     template_name = 'register/index.html'
 
@@ -55,18 +57,18 @@ class Login(View):
             if user is not None:
                 auth.login(request, user)
         
-        return redirect('dashboard')
+        return reverse_lazy('dashboard')
             
 # Users DashBoard
 class Dashboard(LoginRequiredMixin, View):
     def get(self, request):
-        my_records = Record.objects.filter(user=self.request.user.id).order_by('id')
+        my_records = Record.objects.filter(user=self.request.user.id).order_by('creation_date')
         context = {'records': my_records}
   
         return render(request, 'register/dashboard.html', context=context)
   
 # Create Record
-class CreateRrecord(LoginRequiredMixin, CreateView):
+class CreateRecord(LoginRequiredMixin, CreateView):
     model = Record
     form_class = CreateRecordForm
     template_name = 'register/create-record.html'
@@ -78,6 +80,7 @@ class CreateRrecord(LoginRequiredMixin, CreateView):
         return context
     
     def form_valid(self, form):
+        form.instance.record_id = unique_id_generator("REG", 6)
         form.instance.user = self.request.user
         return super().form_valid(form)
         
@@ -92,7 +95,7 @@ class UpdateRecord(LoginRequiredMixin, UpdateView):
 # Read / View a singular record
 class ViewRecord(LoginRequiredMixin, View):
     def get(self, request, pk):
-        all_records = Record.objects.get(id=pk)
+        all_records = Record.objects.get(record_id=pk)
         context = {'record': all_records}
         return render(request, 'register/view-record.html', context=context)
 

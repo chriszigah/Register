@@ -22,8 +22,8 @@
  <br/>
  <a href="{% url 'dashboard' %}" class="btn btn-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Return</a>
  &nbsp;
- <a href="{% url 'update-record' record.id %}" class="btn btn-info"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Update Record</a>
+ <a href="{% url 'update-record' record.record_id %}" class="btn btn-info"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Update Record</a>
  &nbsp;
- <a href="{% url 'delete-record' record.id %}" class="btn btn-danger"><i class="fa fa-minus-square" aria-hidden="true"></i>&nbsp;Delete</a>
+ <a href="{% url 'delete-record' record.record_id %}" class="btn btn-danger"><i class="fa fa-minus-square" aria-hidden="true"></i>&nbsp;Delete</a>
  &nbsp;
  {% endblock %}

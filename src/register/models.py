@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-import uuid
-
 
 # Create your models here.
 
+
+
 class Record(models.Model):
-    record_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    record_id = models.CharField(primary_key=True, max_length=9)
     creation_date = models.DateTimeField(auto_now_add=True)
     department = models.ForeignKey('Department', on_delete=models.SET_NULL, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,  blank=True, null=True)
@@ -26,7 +26,7 @@ class Department(models.Model):
     name = models.CharField(max_length=200)
 
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name_plural = 'departments'
 
     def __str__(self):
         return self.name

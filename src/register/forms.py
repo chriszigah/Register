@@ -6,6 +6,8 @@ from django.forms.widgets import PasswordInput, TextInput
 
 from . models import Record, Department
 
+from . helpers import unique_id_generator
+
 # - Register / Create a user
 
 class SignUpForm(UserCreationForm):
