@@ -6,7 +6,6 @@ from django.forms.widgets import PasswordInput, TextInput
 
 from . models import Record, Department
 
-from . helpers import unique_id_generator
 
 # - Register / Create a user
 
@@ -43,3 +42,12 @@ class CreateRecordForm(forms.ModelForm):
         model =  Record
         fields = ['first_name', 'last_name', 'email', 'phone', 'city', 'country','department', 'avatar']
 
+
+# - Search Form
+class SearchRecordForm(forms.ModelForm):
+    record_id = forms.CharField(widget=TextInput())
+    
+    class Meta:
+        model = Record
+        fields = ['record_id']
+        name = 'q'

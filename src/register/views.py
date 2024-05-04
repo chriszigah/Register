@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect 
 from django.urls import reverse_lazy
-from .forms import LoginForm, SignUpForm, CreateRecordForm
+from .forms import LoginForm, SignUpForm, CreateRecordForm, SearchRecordForm
 
-from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, View, ListView, CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
+
+from django.db.models import Q
 
 from . models import Record, Department
 
@@ -99,6 +101,22 @@ class ViewRecord(LoginRequiredMixin, View):
         context = {'record': all_records}
         return render(request, 'register/view-record.html', context=context)
 
+# Search / View a singular record
+class SearchRecord(LoginRequiredMixin, ListView):
+    model = Record
+    template_name = "register/search-record.html"
+    
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        record_set = Record.objects.filter(Q(record_id=query))
+        return record_set
+    
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_content'] = self.get_queryset() 
+        return context
+   
 # Delete a record
 class DeleteRecord(LoginRequiredMixin, DeleteView):
     model = Record

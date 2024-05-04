@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views 
 
-from . views import Register, Home, Dashboard, CreateRecord, UpdateRecord, ViewRecord, DeleteRecord
+from . views import Register, Home, Dashboard, CreateRecord, UpdateRecord, ViewRecord,SearchRecord, DeleteRecord
 
 from django.contrib.auth import views as auth_views
 
@@ -19,6 +19,7 @@ urlpatterns = [
     path("create-record", CreateRecord.as_view(), name="create-record"),
     path('update-record/<pk>', UpdateRecord.as_view(), name="update-record"),
     path('record/<pk>', ViewRecord.as_view(), name="record"),
+    path("search-record", SearchRecord.as_view(), name="search-record"),
     path('delete-record/<pk>', DeleteRecord.as_view(), name="delete-record"),
 ]
 

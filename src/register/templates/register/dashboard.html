@@ -2,11 +2,15 @@
 <body>
   <h5>Welcome to the Dashboard, {{user}}!</h5>
   <hr />
-
+  <div class="d-flex justify-content-around">
   <a class="btn btn-outline btn-primary btn-sm" href="{% url 'create-record' %}"
     > <i class="fa fa-address-book"> &nbsp;</i>Create a New Record</a
   >
   <br/>
+  <a class="btn btn-outline btn-primary btn-sm" href="{% url 'search-record' %}"
+    > <i class="fa fa-address-book"> &nbsp;</i>Search a  Record</a
+  >
+</div>
  <br/>
   <table class="table table-light table-hover">
     <thead class="table-light">
